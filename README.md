@@ -36,7 +36,7 @@ Y_test shape: (10000, 10)
 
 <figure>
 <div align="center">
-<img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/CIFAR10.png' />
+<img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/CIFAR10.png' /><br>
 <figcaption>CIFAR 10 dataset with 10 classes</figcaption></div>
 </figure>
 
