@@ -76,7 +76,7 @@ Using Keras Convolutional Neural Networks building blocks and custom implemented
 <figure>
 <div align="center">
 <img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/GunnModel.png' /><br>
-<figcaption>Figure 4: Gunn Model. The Gunn Model has Gunn2D layer implemented at the layers marked as *. </figcaption></div>
+<figcaption>Figure 4: Gunn Model. The Gunn Model has Gunn2D layer implemented at the layers marked as * i.e. Conv2*, Conv3* and Conv4* layers. </figcaption></div>
 </figure>
 
 
