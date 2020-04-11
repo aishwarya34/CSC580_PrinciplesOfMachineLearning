@@ -39,3 +39,18 @@ Y_test shape: (10000, 10)
 <figcaption>CIFAR 10 dataset with 10 classes</figcaption></div>
 </figure>
 
+
+
+## GUNN Layer implementation (Keras Custom Layer)
+
+Keras Custom Layer needs to be used because GUNN layer consist of convolutional network which decomposes
+the original computation into multiple sequential channel-wise convolutional operations as opposed to single convolutional operations in Conv2D.
+
+
+<figure>
+<div align="center">
+<img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/SUNNvsGUNN.png' /><br>
+<figcaption>SUNN vs GUNN</figcaption></div>
+</figure>
+
+
