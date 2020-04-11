@@ -54,3 +54,52 @@ the original computation into multiple sequential channel-wise convolutional ope
 </figure>
 
 
+The expansion rate is used to know how many channels are simultaneously updated when decomposing the channels. The kernel channel is the same as the expansion rate. The kernel size is given by fxf.
+
+<figure>
+<div align="center">
+<img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/GunnLayer.png' /><br>
+<figcaption>Gunn2D Keras custom layer</figcaption></div>
+</figure>
+
+
+The Keras custom layer needs forward propagation definition only. 
+
+Note: If you want to build a keras model with a custom layer that performs a custom operation and has a custom gradient, you should use @tf.custom_gradient.
+
+
+## Building GUNN-15 Model in Keras for 10 classes of CIFAR-10 dataset
+
+<figure>
+<div align="center">
+<img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/GunnModel.png' /><br>
+<figcaption>Gunn Model</figcaption></div>
+</figure>
+
+Using Keras Convolutional Neural Networks building blocks and custom implemented Gunn2D layer created GUNN-15 Model.
+
+
+## Training
+
+## Evaluation
+
+## Results / Conclusion
+
+## Reference
+
+[1] GUNN is used to replace convolutional layers which is stated in paper:  Qiao, Siyuan et al. “Gradually Updated Neural Networks for Large-Scale Image Recognition.” ICML (2017).
+
+[2]  The principle of Residual Networks also applies. He, K., Zhang, X., Ren, S., and Sun, J. Deep residual
+learning for image recognition. IEEE Conference on
+Computer Vision and Pattern Recognition, 2016a.
+
+[3]  The principle of Residual Networks also applies. He, K., Zhang, X., Ren, S., and Sun, J. Identity mappings
+in deep residual networks. ECCV, 2016b.
+
+[4]  Batch Normalization will be implemented. Ioffe, S. and Szegedy, C. Batch normalization: Accelerating
+deep network training by reducing internal covariate shift.
+In International Conference on Machine Learning, 2015.
+
+
+
+
