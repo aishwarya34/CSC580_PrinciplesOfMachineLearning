@@ -62,6 +62,7 @@ The expansion rate is used to know how many channels are simultaneously updated 
 <figcaption>Gunn2D Keras custom layer</figcaption></div>
 </figure>
 
+<br>
 
 The Keras custom layer needs forward propagation definition only. 
 
@@ -70,13 +71,14 @@ Note: If you want to build a keras model with a custom layer that performs a cus
 
 ## Building GUNN-15 Model in Keras for 10 classes of CIFAR-10 dataset
 
+Using Keras Convolutional Neural Networks building blocks and custom implemented Gunn2D layer created GUNN-15 Model.
+
 <figure>
 <div align="center">
 <img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/GunnModel.png' /><br>
 <figcaption>Gunn Model</figcaption></div>
 </figure>
 
-Using Keras Convolutional Neural Networks building blocks and custom implemented Gunn2D layer created GUNN-15 Model.
 
 
 ## Training
