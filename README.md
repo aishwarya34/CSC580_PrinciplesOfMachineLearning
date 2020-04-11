@@ -8,7 +8,7 @@
 
 <div align="center">
     <h1 style="font-size:300%;">Gradually Updated Neural Networks for Large-Scale Image Recognition</h1>
-    <p style="font-size:200%;">Aishwarya Radhakrishnan</p>
+    <p style="font-size:40px;">Aishwarya Radhakrishnan</p>
     <p style="font-size:200%;">March 14, 2020</p>
 </div>
   
