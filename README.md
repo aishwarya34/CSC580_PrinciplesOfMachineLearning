@@ -36,7 +36,7 @@ Y_test shape: (10000, 10)
 <figure>
 <div align="center">
 <img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/CIFAR10.png' /><br>
-<figcaption>CIFAR 10 dataset with 10 classes</figcaption></div>
+<figcaption>Figure 1: CIFAR 10 dataset with 10 classes that are randomly chosen</figcaption></div>
 </figure>
 
 
@@ -50,7 +50,7 @@ the original computation into multiple sequential channel-wise convolutional ope
 <figure>
 <div align="center">
 <img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/SUNNvsGUNN.png' /><br>
-<figcaption>SUNN vs GUNN</figcaption></div>
+<figcaption>Figure 2: SUNN vs GUNN. SUNN architecture is our usually used Convolution Layer while GUNN is the channel-wise decomposed architecture.</figcaption></div>
 </figure>
 
 
@@ -59,7 +59,7 @@ The expansion rate is used to know how many channels are simultaneously updated 
 <figure>
 <div align="center">
 <img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/GunnLayer.png' /><br>
-<figcaption>Gunn2D Keras custom layer</figcaption></div>
+<figcaption>Figure 3: Gunn2D Keras custom layer. The Gunn2D layer expands channel at K rate and also uses Residual Network identity block implementation. </figcaption></div>
 </figure>
 
 <br>
@@ -76,7 +76,7 @@ Using Keras Convolutional Neural Networks building blocks and custom implemented
 <figure>
 <div align="center">
 <img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/GunnModel.png' /><br>
-<figcaption>Gunn Model</figcaption></div>
+<figcaption>Figure 4: Gunn Model. The Gunn Model has Gunn2D layer implemented at the layers marked as *. </figcaption></div>
 </figure>
 
 
