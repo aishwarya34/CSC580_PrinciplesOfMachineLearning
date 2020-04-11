@@ -1,5 +1,3 @@
-# CSC 580 Principles Of Machine Learning : Computer Vision Project
-
 <div align="center">
     <h1 style="font-size:300%;">Gradually Updated Neural Networks for Large-Scale Image Recognition</h1>
     <h3 style="font-size:100%;">Aishwarya Radhakrishnan <br>
