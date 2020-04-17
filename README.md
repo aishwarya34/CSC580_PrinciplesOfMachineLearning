@@ -84,6 +84,44 @@ Using Keras Convolutional Neural Networks building blocks and custom implemented
 ## Training
 
 
+
+             total       used       free     shared    buffers     cached
+Mem:          3832       2538       1293          0        164       1944
+-/+ buffers/cache:        429       3402
+Swap:         3275          0       3275
+
+
+             total       used       free     shared    buffers     cached
+Mem:             3          2          1          0          0          1
+-/+ buffers/cache:          0          3
+Swap:            3          0          3
+
+
+
+[aishwarya34@gatekeeper ~]$ elgato va
+The authenticity of host 'login.elgato.hpc.arizona.edu (10.140.86.3)' can't be established.
+RSA key fingerprint is 61:d7:a3:46:0e:8c:52:6a:ff:b7:00:41:79:6f:56:57.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'login.elgato.hpc.arizona.edu,10.140.86.3' (RSA) to the list of known hosts.
+aishwarya34 current allocations:
+------------------------------
+Group           	Type                 	Available Time
+-----           	----                 	--------------
+cscheid         	Standard             	36000:00
+cscheid         	ElGato Standard      	7000:00
+
+
+[aishwarya34@gatekeeper ~]$ ocelote free -g
+             total       used       free     shared    buffers     cached
+Mem:           188        181          7          0          0        177
+-/+ buffers/cache:          2        185
+Swap:           15          0         15
+[aishwarya34@gatekeeper ~]$ elgato free -g
+              total        used        free      shared  buff/cache   available
+Mem:             62           0           1           0          59          61
+Swap:             7           0           7
+
+
 <figure>
 <div align="center">
 <img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/GUNN-15_model.png' /><br>
