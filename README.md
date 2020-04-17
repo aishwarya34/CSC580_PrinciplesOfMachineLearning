@@ -83,6 +83,8 @@ Using Keras Convolutional Neural Networks building blocks and custom implemented
 
 ## Training
 
+* Ocelote includes a large memory node with 2TB of RAM available on 48 cores.  More details on the Large Memory Node
+
 
 
              total       used       free     shared    buffers     cached
@@ -120,6 +122,78 @@ Swap:           15          0         15
               total        used        free      shared  buff/cache   available
 Mem:             62           0           1           0          59          61
 Swap:             7           0           7
+
+
+
+ HPC systems use a queueing system (PBS) to manage compute resources and schedule jobs. 
+ 
+ Jobs are submitted to the batch system using PBS scripts that specify the jobs required resources such as number of nodes, cpus, memory, group, wallclock time.  
+ 
+Does TensorFlow view all CPUs of one machine as ONE device?
+ By default all CPUs available to the process are aggregated under cpu:0 device.
+
+
+Scheduler Options
+1.  Select
+The basic select statement is:
+
+#PBS -l select=X:ncpus=Y:mem=Z
+
+X = the number of nodes or units of the resources required
+
+Y = the number of cores (individual processors) required on each node
+
+Z = the amount of memory (in mb or gb) required on each node
+
+For Ocelote, all of the standard nodes have 6GB per core. "pcmem=6gb" can be added to the line or left off and it will default to 6gb.  The large memory node has 42GB per core so "pcmem=42gb" must be added to use the large memory node.  The following select statement would request one complete node:
+
+#PBS -l select=4:ncpus=28:mem=168gb
+
+
+
+
+ 
+module load python/3.6
+
+source venv/bin/activate
+
+pip install tensorflow-gpu
+
+module load cuda10.1 # will load cuda10.1/toolkit/10.1.168
+
+module load cuda101/neuralnet  # You may also need module load cuda101/neuralnet in case you need the cuDNN libraries for Tensorflow
+
+
+module load tensorrt 
+
+
+
+ python3
+Python 3.6.5 (default, Apr 11 2018, 13:45:41)
+[GCC 6.1.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from tensorflow.python.client import device_lib
+
+>>> print(device_lib.list_local_devices())
+
+
+
+
+6/ Run the job using PBS command qsub.
+
+Now run submit this script to the queue to schedule your job.
+
+qsub tensorflow_gunn_model.pbs
+You receive a line with the jobid when it is successfully submitted like:
+
+698413.head1.cm.cluster
+ When the job ends you should have one or two output files from PBS. They start with the job name and end with the jobid.  In the middle is 'o' for output information or 'e' for error information.
+
+
+mpi_hello_world.o698413
+mpi_hello_world.e698413
+
+
 
 
 <figure>
