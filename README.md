@@ -83,6 +83,14 @@ Using Keras Convolutional Neural Networks building blocks and custom implemented
 
 ## Training
 
+
+<figure>
+<div align="center">
+<img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/GUNN-15_model.png' /><br>
+<figcaption>Figure 5: GUNN-15 model having custon Gunn2D layer. </figcaption></div>
+</figure>
+
+
 ## Evaluation
 
 ## Results / Conclusion
