@@ -86,6 +86,13 @@ Using Keras Convolutional Neural Networks building blocks and custom implemented
 * Ocelote includes a large memory node with 2TB of RAM available on 48 cores.  More details on the Large Memory Node
 
 
+<figure>
+<div align="center">
+<img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/ocelote.jpg' /><br>
+<figcaption>Figure 5: HPC server Ocelote for running Image Classification. </figcaption></div>
+</figure>
+
+
 
              total       used       free     shared    buffers     cached
 Mem:          3832       2538       1293          0        164       1944
