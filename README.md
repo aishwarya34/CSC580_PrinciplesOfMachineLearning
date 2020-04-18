@@ -195,6 +195,33 @@ mpi_hello_world.e698413
 
 
 
+--
+
+
+(venv) [aishwarya34@login2 ~]$ qsub tensorflow_gunn_model.pbs
+3146145.head1.cm.cluster
+
+
+qstat 3146145
+Job id            Name             User              Time Use S Queue
+----------------  ---------------- ----------------  -------- - -----
+3146145.head1     tensorflow_gunn  aishwarya34              0 Q oc_windfall
+
+qstat 3146716
+Job id            Name             User              Time Use S Queue
+----------------  ---------------- ----------------  -------- - -----
+3146716.head1     gunnmodel_small  aishwarya34              0 Q oc_windfall
+
+
+>> qsub smalljob.pbs
+3147030.head1.cm.cluster
+(venv) [aishwarya34@login2 ~]$ qstat 3147030
+Job id            Name             User              Time Use S Queue
+----------------  ---------------- ----------------  -------- - -----
+3147030.head1     gunnmodel_small  aishwarya34              0 Q oc_standard
+
+
+
 
 <figure>
 <div align="center">
