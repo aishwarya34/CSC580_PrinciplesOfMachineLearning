@@ -221,13 +221,21 @@ Job id            Name             User              Time Use S Queue
 
 
 >> qsub smalljob.pbs
-3147030.head1.cm.cluster
-(venv) [aishwarya34@login2 ~]$ qstat 3147030
+3147041.head1.cm.cluster
+(venv) [aishwarya34@login2 ~]$ qstat 3147041
 Job id            Name             User              Time Use S Queue
 ----------------  ---------------- ----------------  -------- - -----
 3147030.head1     gunnmodel_small  aishwarya34              0 Q oc_standard
 
 
+3147041.head1.c aishwary oc_stand gunnmodel_    --    2  56  336gb 00:01 Q   --
+
+>> qdel 3146716.head1
+
+
+
+
+https://public.confluence.arizona.edu/display/UAHPC/Running+Jobs
 
 
 <figure>
