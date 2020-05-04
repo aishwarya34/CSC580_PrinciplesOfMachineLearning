@@ -115,12 +115,6 @@ Trained the Convolutional Neural Net to classify CIFAR-10's 3 classes in Colab u
 
 
 Epoch 1/100 <br>
-Resnet : (20, 32, 32, 240) <br>
-Resnet : (20, 16, 16, 300) <br>
-Resnet : (20, 8, 8, 360)50 <br>
-Resnet : (20, 32, 32, 240) <br>
-Resnet : (20, 16, 16, 300) <br>
-Resnet : (20, 8, 8, 360) <br>
 50/50 [==============================] - 1432s 29s/step - loss: 2.2360 - categorical_accuracy: 0.3160 <br>
 Epoch 2/100 <br>
 50/50 [==============================] - 1398s 28s/step - loss: 2.1116 - categorical_accuracy: 0.3550 <br>
@@ -321,10 +315,7 @@ Epoch 99/100 <br>
 Epoch 100/100 <br>
 50/50 [==============================] - 1998s 27s/step - loss: 0.8460 - categorical_accuracy: 0.7290 <br>
  <br>
-Resnet : (None, 32, 32, 240) <br>
-Resnet : (None, 16, 16, 300) <br>
-Resnet : (None, 8, 8, 360) <br>
-1/1 [==============================] - 0s 1ms/step - loss: 0.8760 - categorical_accuracy: 0.7160 <br>
+100/100 [==============================] - 0s 1ms/step - loss: 0.8760 - categorical_accuracy: 0.7160 <br>
  <br>
 Loss = 0.87605534954071045 <br>
 Test Accuracy = 0.7160 <br>
