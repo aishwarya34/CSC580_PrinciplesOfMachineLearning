@@ -64,7 +64,7 @@ The expansion rate is used to know how many channels are simultaneously updated 
 
 <br>
 
-The Keras custom layer needs forward propagation definition only. 
+The Keras custom layer needs forward propagation definition only.  Since our custom layer has trainable weights, we need to use stateful custom operations using custom layer class definition. 
 
 Note: If you want to build a keras model with a custom layer that performs a custom operation and has a custom gradient, you should use @tf.custom_gradient.
 
@@ -81,168 +81,138 @@ Using Keras Convolutional Neural Networks building blocks and custom implemented
 
 
 
+
+Built Gradually updated Convolutional Neural Net following GUNN-15 model having 15 layers that classifies CIFAR-10's 3 classes in Colab with the following architecture:
+
+- Training examples : 5000  
+- Testing examples : 100  
+- Batch Size : 50 
+- epochs : 50
+- Adam optimizer : for adaptive estimates of lower-order moments
+- loss : Categorical crossentropy for multiple class estimation
+- activation layer : RELU
+- Batch Normalization : for the network to use higher learning rate without vanishing or exploding gradients. 
+
+In addition, all the layers parameters are defined in accordance with the model in figure 4.
+
+
+
 ## Training
-
-* Ocelote includes a large memory node with 2TB of RAM available on 48 cores.  More details on the Large Memory Node
-
-
-<figure>
-<div align="center">
-<img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/ocelote.jpg' /><br>
-<figcaption>Figure 5: HPC server Ocelote for running Image Classification. </figcaption></div>
-</figure>
-
-
-
-             total       used       free     shared    buffers     cached
-Mem:          3832       2538       1293          0        164       1944
--/+ buffers/cache:        429       3402
-Swap:         3275          0       3275
-
-
-             total       used       free     shared    buffers     cached
-Mem:             3          2          1          0          0          1
--/+ buffers/cache:          0          3
-Swap:            3          0          3
-
-
-
-[aishwarya34@gatekeeper ~]$ elgato va
-The authenticity of host 'login.elgato.hpc.arizona.edu (10.140.86.3)' can't be established.
-RSA key fingerprint is 61:d7:a3:46:0e:8c:52:6a:ff:b7:00:41:79:6f:56:57.
-Are you sure you want to continue connecting (yes/no)? yes
-Warning: Permanently added 'login.elgato.hpc.arizona.edu,10.140.86.3' (RSA) to the list of known hosts.
-aishwarya34 current allocations:
-------------------------------
-Group           	Type                 	Available Time
------           	----                 	--------------
-cscheid         	Standard             	36000:00
-cscheid         	ElGato Standard      	7000:00
-
-
-[aishwarya34@gatekeeper ~]$ ocelote free -g
-             total       used       free     shared    buffers     cached
-Mem:           188        181          7          0          0        177
--/+ buffers/cache:          2        185
-Swap:           15          0         15
-[aishwarya34@gatekeeper ~]$ elgato free -g
-              total        used        free      shared  buff/cache   available
-Mem:             62           0           1           0          59          61
-Swap:             7           0           7
-
-
-
- HPC systems use a queueing system (PBS) to manage compute resources and schedule jobs. 
- 
- Jobs are submitted to the batch system using PBS scripts that specify the jobs required resources such as number of nodes, cpus, memory, group, wallclock time.  
- 
-Does TensorFlow view all CPUs of one machine as ONE device?
- By default all CPUs available to the process are aggregated under cpu:0 device.
-
-
-Scheduler Options
-1.  Select
-The basic select statement is:
-
-#PBS -l select=X:ncpus=Y:mem=Z
-
-X = the number of nodes or units of the resources required
-
-Y = the number of cores (individual processors) required on each node
-
-Z = the amount of memory (in mb or gb) required on each node
-
-For Ocelote, all of the standard nodes have 6GB per core. "pcmem=6gb" can be added to the line or left off and it will default to 6gb.  The large memory node has 42GB per core so "pcmem=42gb" must be added to use the large memory node.  The following select statement would request one complete node:
-
-#PBS -l select=4:ncpus=28:mem=168gb
-
-
-
-
- 
-module load python/3.6
-
-source venv/bin/activate
-
-pip install tensorflow-gpu
-
-module load cuda10.1 # will load cuda10.1/toolkit/10.1.168
-
-module load cuda101/neuralnet  # You may also need module load cuda101/neuralnet in case you need the cuDNN libraries for Tensorflow
-
-
-module load tensorrt 
-
-
-
- python3
-Python 3.6.5 (default, Apr 11 2018, 13:45:41)
-[GCC 6.1.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> from tensorflow.python.client import device_lib
-
->>> print(device_lib.list_local_devices())
-
-
-
-
-6/ Run the job using PBS command qsub.
-
-Now run submit this script to the queue to schedule your job.
-
-qsub tensorflow_gunn_model.pbs
-You receive a line with the jobid when it is successfully submitted like:
-
-698413.head1.cm.cluster
- When the job ends you should have one or two output files from PBS. They start with the job name and end with the jobid.  In the middle is 'o' for output information or 'e' for error information.
-
-
-mpi_hello_world.o698413
-mpi_hello_world.e698413
-
-
-
---
-
-
-(venv) [aishwarya34@login2 ~]$ qsub tensorflow_gunn_model.pbs
-3146145.head1.cm.cluster
-
-
-qstat 3146145
-Job id            Name             User              Time Use S Queue
-----------------  ---------------- ----------------  -------- - -----
-3146145.head1     tensorflow_gunn  aishwarya34              0 Q oc_windfall
-
-qstat 3146716
-Job id            Name             User              Time Use S Queue
-----------------  ---------------- ----------------  -------- - -----
-3146716.head1     gunnmodel_small  aishwarya34              0 Q oc_windfall
-
-
->> qsub smalljob.pbs
-3147041.head1.cm.cluster
-(venv) [aishwarya34@login2 ~]$ qstat 3147041
-Job id            Name             User              Time Use S Queue
-----------------  ---------------- ----------------  -------- - -----
-3147030.head1     gunnmodel_small  aishwarya34              0 Q oc_standard
-
-
-3147041.head1.c aishwary oc_stand gunnmodel_    --    2  56  336gb 00:01 Q   --
-
->> qdel 3146716.head1
-
-
-
-
-https://public.confluence.arizona.edu/display/UAHPC/Running+Jobs
-
 
 <figure>
 <div align="center">
 <img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/GUNN-15_model.png' /><br>
 <figcaption>Figure 5: GUNN-15 model having custon Gunn2D layer. </figcaption></div>
 </figure>
+
+
+The above figure shows the High-Level Keras Automatic Differentiation graph having different layers like Conv2d, Activation etc that are Keras APIs as well as the **Gunn2D layer** which is a custom layer.
+
+
+
+Trained the Convolutional Neural Net to classify CIFAR-10's 3 classes in Colab using 5000 training examples and 100 testing examples with batch size of 50 and for 50 epochs, I get the following  output.
+
+
+Epoch 1/50
+Resnet : (20, 32, 32, 240)
+Resnet : (20, 16, 16, 300)
+Resnet : (20, 8, 8, 360)
+Resnet : (20, 32, 32, 240)
+Resnet : (20, 16, 16, 300)
+Resnet : (20, 8, 8, 360)
+50/50 [==============================] - 1432s 29s/step - loss: 2.2360 - categorical_accuracy: 0.3160
+Epoch 2/50
+50/50 [==============================] - 1398s 28s/step - loss: 2.1116 - categorical_accuracy: 0.3550
+Epoch 3/50
+50/50 [==============================] - 1388s 28s/step - loss: 1.9972 - categorical_accuracy: 0.3550
+Epoch 4/50
+50/50 [==============================] - 1398s 28s/step - loss: 1.8943 - categorical_accuracy: 0.3550
+Epoch 5/50
+50/50 [==============================] - 1393s 28s/step - loss: 1.8017 - categorical_accuracy: 0.3550
+Epoch 6/50
+50/50 [==============================] - 1384s 28s/step - loss: 1.7186 - categorical_accuracy: 0.3550
+Epoch 7/50
+50/50 [==============================] - 1377s 28s/step - loss: 1.6449 - categorical_accuracy: 0.3550
+Epoch 8/50
+50/50 [==============================] - 1373s 27s/step - loss: 1.5792 - categorical_accuracy: 0.3550
+Epoch 9/50
+50/50 [==============================] - 1385s 28s/step - loss: 1.5204 - categorical_accuracy: 0.3550
+Epoch 10/50
+50/50 [==============================] - 1388s 28s/step - loss: 1.4700 - categorical_accuracy: 0.3550
+Epoch 11/50
+50/50 [==============================] - 1381s 28s/step - loss: 1.4231 - categorical_accuracy: 0.3550
+Epoch 12/50
+50/50 [==============================] - 1384s 28s/step - loss: 1.3849 - categorical_accuracy: 0.3550
+Epoch 13/50
+50/50 [==============================] - 1382s 28s/step - loss: 1.3457 - categorical_accuracy: 0.3550
+Epoch 14/50
+50/50 [==============================] - 1403s 28s/step - loss: 1.3118 - categorical_accuracy: 0.4270
+Epoch 15/50
+50/50 [==============================] - 1398s 28s/step - loss: 1.2808 - categorical_accuracy: 0.5560
+Epoch 16/50
+50/50 [==============================] - 1384s 28s/step - loss: 1.2505 - categorical_accuracy: 0.5540
+Epoch 17/50
+50/50 [==============================] - 1390s 28s/step - loss: 1.2204 - categorical_accuracy: 0.5610
+Epoch 18/50
+50/50 [==============================] - 1376s 28s/step - loss: 1.1898 - categorical_accuracy: 0.5550
+Epoch 19/50
+50/50 [==============================] - 1385s 28s/step - loss: 1.1730 - categorical_accuracy: 0.5250
+Epoch 20/50
+50/50 [==============================] - 1389s 28s/step - loss: 1.1443 - categorical_accuracy: 0.5350
+Epoch 21/50
+50/50 [==============================] - 1380s 28s/step - loss: 1.0989 - categorical_accuracy: 0.5760
+Epoch 22/50
+50/50 [==============================] - 1390s 28s/step - loss: 1.0757 - categorical_accuracy: 0.5610
+Epoch 23/50
+50/50 [==============================] - 1383s 28s/step - loss: 1.0449 - categorical_accuracy: 0.5810
+Epoch 24/50
+50/50 [==============================] - 1393s 28s/step - loss: 1.0258 - categorical_accuracy: 0.5790
+Epoch 25/50
+50/50 [==============================] - 1386s 28s/step - loss: 1.0040 - categorical_accuracy: 0.5730
+Epoch 26/50
+50/50 [==============================] - 1378s 28s/step - loss: 0.9987 - categorical_accuracy: 0.5620
+Epoch 27/50
+50/50 [==============================] - 1389s 28s/step - loss: 0.9984 - categorical_accuracy: 0.5480
+Epoch 28/50
+50/50 [==============================] - 1388s 28s/step - loss: 0.9607 - categorical_accuracy: 0.5640
+Epoch 29/50
+50/50 [==============================] - 1379s 28s/step - loss: 0.9398 - categorical_accuracy: 0.5770
+Epoch 30/50
+50/50 [==============================] - 1368s 27s/step - loss: 0.9290 - categorical_accuracy: 0.5790
+Epoch 31/50
+30/50 [=================>............] - ETA: 8:56 - loss: 0.9170 - categorical_accuracy: 0.5783
+
+
+Epoch 1/10
+Resnet : (10, 32, 32, 240)
+Resnet : (10, 16, 16, 300)
+Resnet : (10, 8, 8, 360)
+10/10 [==============================] - 140s 14s/step - loss: 1.4316 - categorical_accuracy: 0.4400
+Epoch 2/10
+10/10 [==============================] - 138s 14s/step - loss: 1.4236 - categorical_accuracy: 0.4700
+Epoch 3/10
+10/10 [==============================] - 135s 14s/step - loss: 1.4094 - categorical_accuracy: 0.4500
+Epoch 4/10
+10/10 [==============================] - 137s 14s/step - loss: 1.3995 - categorical_accuracy: 0.5700
+Epoch 5/10
+10/10 [==============================] - 134s 13s/step - loss: 1.3906 - categorical_accuracy: 0.5400
+Epoch 6/10
+10/10 [==============================] - 134s 13s/step - loss: 1.3823 - categorical_accuracy: 0.5000
+Epoch 7/10
+10/10 [==============================] - 135s 13s/step - loss: 1.3742 - categorical_accuracy: 0.4900
+Epoch 8/10
+10/10 [==============================] - 133s 13s/step - loss: 1.3639 - categorical_accuracy: 0.5000
+Epoch 9/10
+10/10 [==============================] - 134s 13s/step - loss: 1.3535 - categorical_accuracy: 0.5600
+Epoch 10/10
+10/10 [==============================] - 135s 13s/step - loss: 1.3436 - categorical_accuracy: 0.5800
+Resnet : (None, 32, 32, 240)
+Resnet : (None, 16, 16, 300)
+Resnet : (None, 8, 8, 360)
+1/1 [==============================] - 0s 1ms/step - loss: 2.7686 - categorical_accuracy: 0.0000e+00
+
+Loss = 2.7685534954071045
+Test Accuracy = 0.0
 
 
 ## Evaluation
