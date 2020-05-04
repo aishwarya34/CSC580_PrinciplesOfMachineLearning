@@ -89,8 +89,8 @@ Built Gradually updated Convolutional Neural Net following GUNN-15 model having 
 - Batch Size : 50 
 - epochs : 50
 - Adam optimizer : for adaptive estimates of lower-order moments
-- loss : Categorical crossentropy for multiple class estimation
-- activation layer : RELU
+- Loss function : Categorical crossentropy for multiple class estimation
+- Activation layer : RELU
 - Batch Normalization : for the network to use higher learning rate without vanishing or exploding gradients. 
 
 In addition, all the layers parameters are defined in accordance with the model in figure 4.
@@ -105,6 +105,7 @@ In addition, all the layers parameters are defined in accordance with the model 
 <figcaption>Figure 5: GUNN-15 model having custon Gunn2D layer. </figcaption></div>
 </figure>
 
+<br>
 
 The above figure shows the High-Level Keras Automatic Differentiation graph having different layers like Conv2d, Activation etc that are Keras APIs as well as the **Gunn2D layer** which is a custom layer.
 
@@ -113,106 +114,223 @@ The above figure shows the High-Level Keras Automatic Differentiation graph havi
 Trained the Convolutional Neural Net to classify CIFAR-10's 3 classes in Colab using 5000 training examples and 100 testing examples with batch size of 50 and for 50 epochs, I get the following  output.
 
 
-Epoch 1/50
-Resnet : (20, 32, 32, 240)
-Resnet : (20, 16, 16, 300)
-Resnet : (20, 8, 8, 360)
-Resnet : (20, 32, 32, 240)
-Resnet : (20, 16, 16, 300)
-Resnet : (20, 8, 8, 360)
-50/50 [==============================] - 1432s 29s/step - loss: 2.2360 - categorical_accuracy: 0.3160
-Epoch 2/50
-50/50 [==============================] - 1398s 28s/step - loss: 2.1116 - categorical_accuracy: 0.3550
-Epoch 3/50
-50/50 [==============================] - 1388s 28s/step - loss: 1.9972 - categorical_accuracy: 0.3550
-Epoch 4/50
-50/50 [==============================] - 1398s 28s/step - loss: 1.8943 - categorical_accuracy: 0.3550
-Epoch 5/50
-50/50 [==============================] - 1393s 28s/step - loss: 1.8017 - categorical_accuracy: 0.3550
-Epoch 6/50
-50/50 [==============================] - 1384s 28s/step - loss: 1.7186 - categorical_accuracy: 0.3550
-Epoch 7/50
-50/50 [==============================] - 1377s 28s/step - loss: 1.6449 - categorical_accuracy: 0.3550
-Epoch 8/50
-50/50 [==============================] - 1373s 27s/step - loss: 1.5792 - categorical_accuracy: 0.3550
-Epoch 9/50
-50/50 [==============================] - 1385s 28s/step - loss: 1.5204 - categorical_accuracy: 0.3550
-Epoch 10/50
-50/50 [==============================] - 1388s 28s/step - loss: 1.4700 - categorical_accuracy: 0.3550
-Epoch 11/50
-50/50 [==============================] - 1381s 28s/step - loss: 1.4231 - categorical_accuracy: 0.3550
-Epoch 12/50
-50/50 [==============================] - 1384s 28s/step - loss: 1.3849 - categorical_accuracy: 0.3550
-Epoch 13/50
-50/50 [==============================] - 1382s 28s/step - loss: 1.3457 - categorical_accuracy: 0.3550
-Epoch 14/50
-50/50 [==============================] - 1403s 28s/step - loss: 1.3118 - categorical_accuracy: 0.4270
-Epoch 15/50
-50/50 [==============================] - 1398s 28s/step - loss: 1.2808 - categorical_accuracy: 0.5560
-Epoch 16/50
-50/50 [==============================] - 1384s 28s/step - loss: 1.2505 - categorical_accuracy: 0.5540
-Epoch 17/50
-50/50 [==============================] - 1390s 28s/step - loss: 1.2204 - categorical_accuracy: 0.5610
-Epoch 18/50
-50/50 [==============================] - 1376s 28s/step - loss: 1.1898 - categorical_accuracy: 0.5550
-Epoch 19/50
-50/50 [==============================] - 1385s 28s/step - loss: 1.1730 - categorical_accuracy: 0.5250
-Epoch 20/50
-50/50 [==============================] - 1389s 28s/step - loss: 1.1443 - categorical_accuracy: 0.5350
-Epoch 21/50
-50/50 [==============================] - 1380s 28s/step - loss: 1.0989 - categorical_accuracy: 0.5760
-Epoch 22/50
-50/50 [==============================] - 1390s 28s/step - loss: 1.0757 - categorical_accuracy: 0.5610
-Epoch 23/50
-50/50 [==============================] - 1383s 28s/step - loss: 1.0449 - categorical_accuracy: 0.5810
-Epoch 24/50
-50/50 [==============================] - 1393s 28s/step - loss: 1.0258 - categorical_accuracy: 0.5790
-Epoch 25/50
-50/50 [==============================] - 1386s 28s/step - loss: 1.0040 - categorical_accuracy: 0.5730
-Epoch 26/50
-50/50 [==============================] - 1378s 28s/step - loss: 0.9987 - categorical_accuracy: 0.5620
-Epoch 27/50
-50/50 [==============================] - 1389s 28s/step - loss: 0.9984 - categorical_accuracy: 0.5480
-Epoch 28/50
-50/50 [==============================] - 1388s 28s/step - loss: 0.9607 - categorical_accuracy: 0.5640
-Epoch 29/50
-50/50 [==============================] - 1379s 28s/step - loss: 0.9398 - categorical_accuracy: 0.5770
-Epoch 30/50
-50/50 [==============================] - 1368s 27s/step - loss: 0.9290 - categorical_accuracy: 0.5790
-Epoch 31/50
-30/50 [=================>............] - ETA: 8:56 - loss: 0.9170 - categorical_accuracy: 0.5783
+Epoch 1/100 <br>
+Resnet : (20, 32, 32, 240) <br>
+Resnet : (20, 16, 16, 300) <br>
+Resnet : (20, 8, 8, 360)50 <br>
+Resnet : (20, 32, 32, 240) <br>
+Resnet : (20, 16, 16, 300) <br>
+Resnet : (20, 8, 8, 360) <br>
+50/50 [==============================] - 1432s 29s/step - loss: 2.2360 - categorical_accuracy: 0.3160 <br>
+Epoch 2/100 <br>
+50/50 [==============================] - 1398s 28s/step - loss: 2.1116 - categorical_accuracy: 0.3550 <br>
+Epoch 3/100 <br>
+50/50 [==============================] - 1388s 28s/step - loss: 1.9972 - categorical_accuracy: 0.3550 <br>
+Epoch 4/100 <br>
+50/50 [==============================] - 1398s 28s/step - loss: 1.8943 - categorical_accuracy: 0.3550 <br>
+Epoch 5/100 <br>
+50/50 [==============================] - 1393s 28s/step - loss: 1.8017 - categorical_accuracy: 0.3550 <br>
+Epoch 6/100 <br>
+50/50 [==============================] - 1384s 28s/step - loss: 1.7186 - categorical_accuracy: 0.3550 <br>
+Epoch 7/50 <br>
+50/50 [==============================] - 1377s 28s/step - loss: 1.6449 - categorical_accuracy: 0.3550 <br>
+Epoch 8/100 <br>
+50/50 [==============================] - 1373s 27s/step - loss: 1.5792 - categorical_accuracy: 0.3550 <br>
+Epoch 9/100 <br>
+50/50 [==============================] - 1385s 28s/step - loss: 1.5204 - categorical_accuracy: 0.3550 <br>
+Epoch 10/100 <br>
+50/50 [==============================] - 1388s 28s/step - loss: 1.4700 - categorical_accuracy: 0.3550 <br>
+Epoch 11/100 <br>
+50/50 [==============================] - 1381s 28s/step - loss: 1.4231 - categorical_accuracy: 0.3550 <br>
+Epoch 12/100 <br>
+50/50 [==============================] - 1384s 28s/step - loss: 1.3849 - categorical_accuracy: 0.3550 <br>
+Epoch 13/100 <br>
+50/50 [==============================] - 1382s 28s/step - loss: 1.3457 - categorical_accuracy: 0.3550 <br>
+Epoch 14/100 <br>
+50/50 [==============================] - 1403s 28s/step - loss: 1.3118 - categorical_accuracy: 0.4270 <br>
+Epoch 15/100 <br>
+50/50 [==============================] - 1398s 28s/step - loss: 1.2808 - categorical_accuracy: 0.5560 <br>
+Epoch 16/100 <br>
+50/50 [==============================] - 1384s 28s/step - loss: 1.2505 - categorical_accuracy: 0.5540 <br>
+Epoch 17/100 <br>
+50/50 [==============================] - 1390s 28s/step - loss: 1.2204 - categorical_accuracy: 0.5610 <br>
+Epoch 18/100 <br>
+50/50 [==============================] - 1376s 28s/step - loss: 1.1898 - categorical_accuracy: 0.5550 <br>
+Epoch 19/100 <br>
+50/50 [==============================] - 1385s 28s/step - loss: 1.1730 - categorical_accuracy: 0.5250 <br>
+Epoch 20/100 <br>
+50/50 [==============================] - 1389s 28s/step - loss: 1.1443 - categorical_accuracy: 0.5350 <br>
+Epoch 21/100 <br>
+50/50 [==============================] - 1380s 28s/step - loss: 1.0989 - categorical_accuracy: 0.5760 <br>
+Epoch 22/100 <br>
+50/50 [==============================] - 1390s 28s/step - loss: 1.0757 - categorical_accuracy: 0.5610 <br>
+Epoch 23/100 <br>
+50/50 [==============================] - 1383s 28s/step - loss: 1.0449 - categorical_accuracy: 0.5810 <br>
+Epoch 24/100 <br>
+50/50 [==============================] - 1393s 28s/step - loss: 1.0258 - categorical_accuracy: 0.5790 <br>
+Epoch 25/100 <br>
+50/50 [==============================] - 1386s 28s/step - loss: 1.0040 - categorical_accuracy: 0.5730 <br>
+Epoch 26/100 <br>
+50/50 [==============================] - 1378s 28s/step - loss: 0.9987 - categorical_accuracy: 0.5620 <br>
+Epoch 27/100 <br>
+50/50 [==============================] - 1389s 28s/step - loss: 0.9984 - categorical_accuracy: 0.5480 <br>
+Epoch 28/100 <br>
+50/50 [==============================] - 1388s 28s/step - loss: 0.9607 - categorical_accuracy: 0.5640 <br>
+Epoch 29/100 <br>
+50/50 [==============================] - 1379s 28s/step - loss: 0.9398 - categorical_accuracy: 0.5770 <br>
+Epoch 30/100 <br>
+50/50 [==============================] - 1368s 27s/step - loss: 0.9290 - categorical_accuracy: 0.5790 <br>
+Epoch 31/100 <br>
+50/50 [==============================] - 1378s 27s/step - loss: 0.9840 - categorical_accuracy: 0.5680 <br>
+Epoch 32/100 <br>
+50/50 [==============================] - 1381s 27s/step - loss: 0.9820 - categorical_accuracy: 0.5990 <br>
+Epoch 33/100 <br>
+50/50 [==============================] - 1391s 27s/step - loss: 0.9820 - categorical_accuracy: 0.6170 <br>
+Epoch 34/100 <br>
+50/50 [==============================] - 1402s 27s/step - loss: 0.9790 - categorical_accuracy: 0.5910 <br>
+Epoch 35/100 <br>
+50/50 [==============================] - 1410s 27s/step - loss: 0.9760 - categorical_accuracy: 0.5930 <br>
+Epoch 36/100 <br>
+50/50 [==============================] - 1420s 27s/step - loss: 0.9840 - categorical_accuracy: 0.6370 <br>
+Epoch 37/100 <br>
+50/50 [==============================] - 1425s 27s/step - loss: 0.9670 - categorical_accuracy: 0.6260 <br>
+Epoch 38/100 <br>
+50/50 [==============================] - 1431s 27s/step - loss: 0.9670 - categorical_accuracy: 0.6250 <br>
+Epoch 39/100 <br>
+50/50 [==============================] - 1437s 27s/step - loss: 0.9630 - categorical_accuracy: 0.6410 <br>
+Epoch 40/100 <br>
+50/50 [==============================] - 1444s 27s/step - loss: 0.9620 - categorical_accuracy: 0.6250 <br>
+Epoch 41/100 <br>
+50/50 [==============================] - 1454s 27s/step - loss: 0.9540 - categorical_accuracy: 0.6100 <br>
+Epoch 42/100 <br>
+50/50 [==============================] - 1459s 27s/step - loss: 0.9550 - categorical_accuracy: 0.6590 <br>
+Epoch 43/100 <br>
+50/50 [==============================] - 1462s 27s/step - loss: 0.9460 - categorical_accuracy: 0.6730 <br>
+Epoch 44/100 <br>
+50/50 [==============================] - 1465s 27s/step - loss: 0.9500 - categorical_accuracy: 0.6450 <br>
+Epoch 45/100 <br>
+50/50 [==============================] - 1477s 27s/step - loss: 0.9510 - categorical_accuracy: 0.6920 <br>
+Epoch 46/100 <br>
+50/50 [==============================] - 1489s 27s/step - loss: 0.9450 - categorical_accuracy: 0.6510 <br>
+Epoch 47/100 <br>
+50/50 [==============================] - 1495s 27s/step - loss: 0.9370 - categorical_accuracy: 0.6780 <br>
+Epoch 48/100 <br>
+50/50 [==============================] - 1505s 27s/step - loss: 0.9260 - categorical_accuracy: 0.6630 <br>
+Epoch 49/100 <br>
+50/50 [==============================] - 1512s 27s/step - loss: 0.9430 - categorical_accuracy: 0.6940 <br>
+Epoch 50/100 <br>
+50/50 [==============================] - 1523s 27s/step - loss: 0.9450 - categorical_accuracy: 0.6940 <br>
+Epoch 51/100 <br>
+50/50 [==============================] - 1531s 27s/step - loss: 0.9170 - categorical_accuracy: 0.6970 <br>
+Epoch 52/100 <br>
+50/50 [==============================] - 1546s 27s/step - loss: 0.9250 - categorical_accuracy: 0.7030 <br>
+Epoch 53/100 <br>
+50/50 [==============================] - 1557s 27s/step - loss: 0.9190 - categorical_accuracy: 0.7020 <br>
+Epoch 54/100 <br>
+50/50 [==============================] - 1562s 27s/step - loss: 0.9120 - categorical_accuracy: 0.6730 <br>
+Epoch 55/100 <br>
+50/50 [==============================] - 1578s 27s/step - loss: 0.9050 - categorical_accuracy: 0.6720 <br>
+Epoch 56/100 <br>
+50/50 [==============================] - 1582s 27s/step - loss: 0.9030 - categorical_accuracy: 0.6620 <br>
+Epoch 57/100 <br>
+50/50 [==============================] - 1592s 27s/step - loss: 0.9070 - categorical_accuracy: 0.6920 <br>
+Epoch 58/100 <br>
+50/50 [==============================] - 1591s 27s/step - loss: 0.9070 - categorical_accuracy: 0.6810 <br>
+Epoch 59/10 <br>
+50/50 [==============================] - 1601s 27s/step - loss: 0.9040 - categorical_accuracy: 0.7120 <br>
+Epoch 60/100 <br>
+50/50 [==============================] - 1612s 27s/step - loss: 0.9040 - categorical_accuracy: 0.7310 <br>
+Epoch 61/100 <br>
+50/50 [==============================] - 1627s 27s/step - loss: 0.8990 - categorical_accuracy: 0.7290 <br>
+Epoch 62/100 <br>
+50/50 [==============================] - 1631s 27s/step - loss: 0.8970 - categorical_accuracy: 0.7260 <br>
+Epoch 63/100 <br>
+50/50 [==============================] - 1648s 27s/step - loss: 0.8920 - categorical_accuracy: 0.7130 <br>
+Epoch 64/100 <br>
+50/50 [==============================] - 1659s 27s/step - loss: 0.8940 - categorical_accuracy: 0.7340 <br>
+Epoch 65/100 <br>
+50/50 [==============================] - 1661s 27s/step - loss: 0.8870 - categorical_accuracy: 0.7320 <br>
+Epoch 66/100 <br>
+50/50 [==============================] - 1672s 27s/step - loss: 0.8890 - categorical_accuracy: 0.7230 <br>
+Epoch 67/100 <br>
+50/50 [==============================] - 1686s 27s/step - loss: 0.8880 - categorical_accuracy: 0.7310 <br>
+Epoch 68/100 <br>
+50/50 [==============================] - 1694s 27s/step - loss: 0.8820 - categorical_accuracy: 0.7490 <br>
+Epoch 69/100 <br>
+50/50 [==============================] - 1703s 27s/step - loss: 0.8890 - categorical_accuracy: 0.7320 <br>
+Epoch 70/100 <br>
+50/50 [==============================] - 1705s 27s/step - loss: 0.8820 - categorical_accuracy: 0.7340 <br>
+Epoch 71/100 <br>
+50/50 [==============================] - 1718s 27s/step - loss: 0.8890 - categorical_accuracy: 0.7120 <br>
+Epoch 72/100 <br>
+50/50 [==============================] - 1713s 27s/step - loss: 0.8720 - categorical_accuracy: 0.7260 <br>
+Epoch 73/100 <br>
+50/50 [==============================] - 1724s 27s/step - loss: 0.8830 - categorical_accuracy: 0.7190 <br>
+Epoch 74/100 <br>
+50/50 [==============================] - 1735s 27s/step - loss: 0.8830 - categorical_accuracy: 0.7270 <br>
+Epoch 75/100 <br>
+50/50 [==============================] - 1742s 27s/step - loss: 0.8730 - categorical_accuracy: 0.7210 <br>
+Epoch 76/100 <br>
+50/50 [==============================] - 1756s 27s/step - loss: 0.8620 - categorical_accuracy: 0.7210 <br>
+Epoch 77/100 <br>
+50/50 [==============================] - 1763s 27s/step - loss: 0.8610 - categorical_accuracy: 0.7210 <br>
+Epoch 78/100 <br>
+50/50 [==============================] - 1774s 27s/step - loss: 0.8690 - categorical_accuracy: 0.7130 <br>
+Epoch 79/100 <br>
+50/50 [==============================] - 1786s 27s/step - loss: 0.8620 - categorical_accuracy: 0.7350 <br>
+Epoch 80/100 <br>
+50/50 [==============================] - 1790s 27s/step - loss: 0.8650 - categorical_accuracy: 0.7450 <br>
+Epoch 81/100 <br>
+50/50 [==============================] - 1804s 27s/step - loss: 0.8520 - categorical_accuracy: 0.7340 <br>
+Epoch 82/100 <br>
+50/50 [==============================] - 1813s 27s/step - loss: 0.8510 - categorical_accuracy: 0.7450 <br>
+Epoch 83/100 <br>
+50/50 [==============================] - 1826s 27s/step - loss: 0.8510 - categorical_accuracy: 0.7210 <br>
+Epoch 84/100 <br>
+50/50 [==============================] - 1838s 27s/step - loss: 0.8570 - categorical_accuracy: 0.6990 <br>
+Epoch 85/100 <br>
+50/50 [==============================] - 1837s 27s/step - loss: 0.8560 - categorical_accuracy: 0.7010 <br>
+Epoch 86/100 <br>
+50/50 [==============================] - 1845s 27s/step - loss: 0.8580 - categorical_accuracy: 0.7210 <br>
+Epoch 87/100 <br>
+50/50 [==============================] - 1852s 27s/step - loss: 0.8540 - categorical_accuracy: 0.7210 <br>
+Epoch 88/100 <br>
+50/50 [==============================] - 1862s 27s/step - loss: 0.8590 - categorical_accuracy: 0.7230 <br>
+Epoch 89/100 <br>
+50/50 [==============================] - 1873s 27s/step - loss: 0.8430 - categorical_accuracy: 0.7120 <br>
+Epoch 90/100 <br>
+50/50 [==============================] - 1889s 27s/step - loss: 0.8440 - categorical_accuracy: 0.7270 <br>
+Epoch 91/100 <br>
+50/50 [==============================] - 1895s 27s/step - loss: 0.8430 - categorical_accuracy: 0.7320 <br>
+Epoch 92/100 <br>
+50/50 [==============================] - 1910s 27s/step - loss: 0.8420 - categorical_accuracy: 0.7240 <br>
+Epoch 93/100 <br>
+50/50 [==============================] - 1921s 27s/step - loss: 0.8460 - categorical_accuracy: 0.7120 <br>
+Epoch 94/100 <br>
+50/50 [==============================] - 1936s 27s/step - loss: 0.8340 - categorical_accuracy: 0.7230 <br>
+Epoch 95/100 <br>
+50/50 [==============================] - 1947s 27s/step - loss: 0.8490 - categorical_accuracy: 0.7190 <br>
+Epoch 96/100 <br>
+50/50 [==============================] - 1951s 27s/step - loss: 0.8380 - categorical_accuracy: 0.7320 <br>
+Epoch 97/100 <br>
+50/50 [==============================] - 1968s 27s/step - loss: 0.8450 - categorical_accuracy: 0.7130 <br>
+Epoch 98/100 <br>
+50/50 [==============================] - 1972s 27s/step - loss: 0.8430 - categorical_accuracy: 0.7240 <br>
+Epoch 99/100 <br>
+50/50 [==============================] - 1985s 27s/step - loss: 0.8420 - categorical_accuracy: 0.7210 <br>
+Epoch 100/100 <br>
+50/50 [==============================] - 1998s 27s/step - loss: 0.8460 - categorical_accuracy: 0.7290 <br>
+ <br>
+Resnet : (None, 32, 32, 240) <br>
+Resnet : (None, 16, 16, 300) <br>
+Resnet : (None, 8, 8, 360) <br>
+1/1 [==============================] - 0s 1ms/step - loss: 0.8760 - categorical_accuracy: 0.7160 <br>
+ <br>
+Loss = 0.87605534954071045 <br>
+Test Accuracy = 0.7160 <br>
 
 
-Epoch 1/10
-Resnet : (10, 32, 32, 240)
-Resnet : (10, 16, 16, 300)
-Resnet : (10, 8, 8, 360)
-10/10 [==============================] - 140s 14s/step - loss: 1.4316 - categorical_accuracy: 0.4400
-Epoch 2/10
-10/10 [==============================] - 138s 14s/step - loss: 1.4236 - categorical_accuracy: 0.4700
-Epoch 3/10
-10/10 [==============================] - 135s 14s/step - loss: 1.4094 - categorical_accuracy: 0.4500
-Epoch 4/10
-10/10 [==============================] - 137s 14s/step - loss: 1.3995 - categorical_accuracy: 0.5700
-Epoch 5/10
-10/10 [==============================] - 134s 13s/step - loss: 1.3906 - categorical_accuracy: 0.5400
-Epoch 6/10
-10/10 [==============================] - 134s 13s/step - loss: 1.3823 - categorical_accuracy: 0.5000
-Epoch 7/10
-10/10 [==============================] - 135s 13s/step - loss: 1.3742 - categorical_accuracy: 0.4900
-Epoch 8/10
-10/10 [==============================] - 133s 13s/step - loss: 1.3639 - categorical_accuracy: 0.5000
-Epoch 9/10
-10/10 [==============================] - 134s 13s/step - loss: 1.3535 - categorical_accuracy: 0.5600
-Epoch 10/10
-10/10 [==============================] - 135s 13s/step - loss: 1.3436 - categorical_accuracy: 0.5800
-Resnet : (None, 32, 32, 240)
-Resnet : (None, 16, 16, 300)
-Resnet : (None, 8, 8, 360)
-1/1 [==============================] - 0s 1ms/step - loss: 2.7686 - categorical_accuracy: 0.0000e+00
 
-Loss = 2.7685534954071045
-Test Accuracy = 0.0
 
 
 ## Evaluation
