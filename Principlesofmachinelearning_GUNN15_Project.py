@@ -13,16 +13,6 @@ computation orderings to the channels within convolutional layers.*
 *Gradually Updated Neural Networks (GUNN) as opposed to the default Simultaneously Updated Convolutional Network (SUNN / CNN), gradually updates the feature representations against the
 traditional convolutional network that computes its output
 simultaneously.  This is achieved by updating one channel at a time and using the newly computed parameter of this channel and old parameter of other channels to get another channels in a single convolutional layer. This is repeated for all the channels untill all the old parameters of a single convolutional layer are updated to new values. Thus a single convolutional layer is broken down into multiple gradually updated convolutional layer.*
-
-## Prerequisites
-
-sudo yum install python-pip
-
-sudo pip install keras
-
-sudo pip install tensorflow
-
-sudo pip install numpy
 """
 
 # Commented out IPython magic to ensure Python compatibility.
@@ -87,6 +77,15 @@ print ("Y_train shape: " + str(Y_train_subsetlabel.shape))
 print ("X_test shape: " + str(X_test_subsetlabel.shape))
 print ("Y_test shape: " + str(Y_test_subsetlabel.shape))
 
+"""<figure>
+<center>
+<img src='https://drive.google.com/uc?id=1Cn19zTjlJEdYo-EjeGRjPOK9ol_wxfuV' />
+<figcaption>CIFAR 10 dataset with 10 classes</figcaption></center>
+</figure>
+
+# GUNN Layer implementation (Keras Custom Layer)
+"""
+
 def conv_forward(A_shortcut, W1, b1, W2, b2, W3, b3, hparameters):
     """
     Implements the forward propagation for a convolution function
@@ -127,7 +126,6 @@ def conv_forward(A_shortcut, W1, b1, W2, b2, W3, b3, hparameters):
 
     # Add shortcut value to main path. This implements the identity block in Residual Network.
     A = Add()([A , A_shortcut])
-    print('Resnet : {}'.format(A.shape))
 
     return A
 
@@ -183,9 +181,7 @@ def GunnModel(input_shape):
     model -- a Model() instance in Keras
     """
     
-    print("input_shape: {}".format(input_shape))
     X_input = Input(input_shape)
-    print("X_input: {}".format(X_input.shape))
     X = Conv2D(64, (3, 3), strides = (1, 1), padding='same', name = 'z1')(X_input) # 32x32x3 -> 32x32x64   ; padding = 1
     X = BatchNormalization(axis = 3 , name = 'bn1')(X)
     X = Activation('relu')(X)
@@ -194,42 +190,27 @@ def GunnModel(input_shape):
     layer = BatchNormalization(axis = 3 , name = 'bn2')
     X = layer(X)
     X = Activation('relu')(X)
-    print('After Activation : {}'.format(X))
     X = Gunn2D(240, 20)(X) # custom Keras layer class
-    print('After Gunn2D : {}'.format(X))
     X = Conv2D(300, (1, 1), strides = (1, 1), padding='valid', name = 'z3')(X)
-    print('After Conv2D : {}'.format(X))
     X = BatchNormalization(axis = 3 , name = 'bn3')(X)
-    print('After BN : {}'.format(X))
     X = Activation('relu')(X)
-    print('After Activation : {}'.format(X))
     X = AveragePooling2D((2, 2), name = 'avg_pool1')(X)
-    print('After AveragePooling2D : {}'.format(X))
     X = Gunn2D(300, 20)(X)
-    print('After Gunn2D 2 : {}'.format(X))
-    print(X)
     X = Conv2D(360, (1, 1), strides = (1, 1), padding='valid', name = 'z4')(X)
     X = BatchNormalization(axis = 3 , name = 'bn4')(X)
     X = Activation('relu')(X)
     X = AveragePooling2D((2, 2), name = 'avg_pool2')(X)
-    print(X)
     X = Gunn2D(360, 20)(X)
-    print('After Gunn2D 3 : {}'.format(X))
-    print(X)
     X = Conv2D(360, (1, 1), strides = (1, 1), padding='valid', name = 'z5')(X)
     X = BatchNormalization(axis = 3 , name = 'bn5')(X)
     X = Activation('relu')(X)
     X = AveragePooling2D((8, 8), name = 'avg_pool3')(X)
-    print('After AveragePooling2D : {}'.format(X))
     X = Flatten()(X)
-    print('After Flatten : {}'.format(X))
     X = Dense(360, activation='softmax', name = 'fc1')(X)
     X = Dense(360, activation='softmax', name = 'fc2')(X)
     X = Dense(3, activation='softmax', name = 'fc3')(X)
-    print('After Dense : {}'.format(X))
 
     model = Model(inputs = X_input, outputs = X, name = 'GUNN-15-Model')
-    print(model)
     return model
 
 """## Fit model on CIFAR-10 dataset"""
