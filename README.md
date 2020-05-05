@@ -97,7 +97,7 @@ Built Gradually updated Convolutional Neural Net following GUNN-15 model having 
 - Training examples : 5000  
 - Testing examples : 100  
 - Batch Size : 50 
-- epochs : 50
+- epochs : 100
 - Adam optimizer : for adaptive estimates of lower-order moments
 - Loss function : Categorical crossentropy for multiple class estimation
 - Activation layer : RELU
