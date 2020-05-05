@@ -293,15 +293,15 @@ Epoch 88/100 <br>
 Epoch 89/100 <br>
 50/50 [==============================] - 1873s 27s/step - loss: 0.8430 - categorical_accuracy: 0.7120 <br>
 Epoch 90/100 <br>
-50/50 [==============================] - 1889s 27s/step - loss: 0.8440 - categorical_accuracy: 0.7270 <br>
+50/50 [==============================] - 1889s 27s/step - loss: 0.8440 - categorical_accuracy: 0.7570 <br>
 Epoch 91/100 <br>
-50/50 [==============================] - 1895s 27s/step - loss: 0.8430 - categorical_accuracy: 0.7320 <br>
+50/50 [==============================] - 1895s 27s/step - loss: 0.8430 - categorical_accuracy: 0.7620 <br>
 Epoch 92/100 <br>
 50/50 [==============================] - 1910s 27s/step - loss: 0.8420 - categorical_accuracy: 0.7240 <br>
 Epoch 93/100 <br>
 50/50 [==============================] - 1921s 27s/step - loss: 0.8460 - categorical_accuracy: 0.7120 <br>
 Epoch 94/100 <br>
-50/50 [==============================] - 1936s 27s/step - loss: 0.8340 - categorical_accuracy: 0.7230 <br>
+50/50 [==============================] - 1936s 27s/step - loss: 0.8340 - categorical_accuracy: 0.7530 <br>
 Epoch 95/100 <br>
 50/50 [==============================] - 1947s 27s/step - loss: 0.8490 - categorical_accuracy: 0.7190 <br>
 Epoch 96/100 <br>
@@ -315,18 +315,25 @@ Epoch 99/100 <br>
 Epoch 100/100 <br>
 50/50 [==============================] - 1998s 27s/step - loss: 0.8460 - categorical_accuracy: 0.7290 <br>
  <br>
-100/100 [==============================] - 0s 1ms/step - loss: 0.8760 - categorical_accuracy: 0.7160 <br>
+100/100 [==============================] - 0s 1ms/step - loss: 0.8760 - categorical_accuracy: 0.6960 <br>
  <br>
 Loss = 0.87605534954071045 <br>
-Test Accuracy = 0.7160 <br>
+Test Accuracy = 0.6960 <br>
 
 
 
-
+Note: Require to train the whole classifier at once as checkpointing of this model is not possible. This is because the weights in our custom Keras layer are changed multiple times using multiple operations in a single batch step. Hence, saving of such a weight tensor is not yet defined in Tensorflow.
 
 ## Evaluation
 
+The GUNN-15 model in the original paper achieved 80% accuracy for 10 class classification. In the above model we have achieved 69.60% accuracy on the test set after training on training and label subset of CIFAR-10 dataset. The best training accuracy achieved was 76.20% hence early stopping also could have helped. 
+
+
+
 ## Results / Conclusion
+
+Thus, we can see that convolutional neural networks when expanded depth-wise without increasing number of weights causes good classifier of images and also does not increase the computational cost.
+
 
 ## Reference
 
