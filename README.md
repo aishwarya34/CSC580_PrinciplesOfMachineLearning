@@ -356,7 +356,7 @@ The GUNN-15 model in the original paper achieved 80% accuracy for 10 class class
 
 ## Results / Conclusion
 
-Thus, we can see that convolutional neural networks when expanded depth-wise without increasing number of weights causes good classifier of images and also does not increase the computational cost. Also, the residual network properties are seen as for such a deep network the gradients have not vanished or exploded.
+Thus, we can see that convolutional neural networks when expanded depth-wise without increasing number of weights causes good classifier of images and also does not increase the computational cost. A single convolutional layer in CNN when broken down into multiple gradually updated convolutional layer would increases the depth and learning capability without increasing the computation cost. Also, the residual network properties are seen as for such a deep network the gradients have not vanished or exploded. 
 
 ## Reference
 
