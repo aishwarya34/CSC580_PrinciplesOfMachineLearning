@@ -31,7 +31,7 @@ sudo pip install numpy <br>
 
 ## CIFAR-10 Dataset
 
-We do not need to download CIFAR-10 dataset explicitly as we Tensorflow provides *cifar10.load_data()* API which automatically downloads and loads Training and Test set in numpy ndarray. CIFAR-10 dataset has 32x32 dimensional images having objects from 10 classes as shown in figure 1.
+We do not need to download CIFAR-10 dataset explicitly as Tensorflow provides *cifar10.load_data()* API which automatically downloads and loads Training and Test set in numpy ndarray. CIFAR-10 dataset has 32x32 dimensional images having objects from 10 classes as shown in figure 1.
 
 After loading the CIFAR-10 dataset we choose a subset of dataset as follows:
 
@@ -64,7 +64,8 @@ the original computation into multiple sequential channel-wise convolutional ope
 </figure>
 
 
-The expansion rate is used to know how many channels are simultaneously updated when decomposing the channels. The kernel channel is the same as the expansion rate. The kernel size is given by fxf.
+The expansion rate is used to know how many channels are simultaneously updated when decomposing the channels. The kernel's channel in Gunn2D layer is the same as the expansion rate. The kernel size i.e. width and height is given by fxf.
+
 
 <figure>
 <div align="center">
@@ -76,10 +77,10 @@ The expansion rate is used to know how many channels are simultaneously updated 
 
 The Keras custom layer needs forward propagation definition only.  Since our custom layer has trainable weights, we need to use stateful custom operations using custom layer class definition. 
 
-Note: If you want to build a keras model with a custom layer that performs a custom operation and has a custom gradient, you should use @tf.custom_gradient.
+Note: If you want to build a keras model with a custom layer that performs a stateless custom operation and has a custom gradient, you should use Lambda() layers and @tf.custom\_gradient.
 
 
-## Building GUNN-15 Model in Keras for 10 classes of CIFAR-10 dataset
+## Building GUNN-15 Model in Keras for 3 classes of CIFAR-10 dataset
 
 Using Keras Convolutional Neural Networks building blocks and custom implemented Gunn2D layer created GUNN-15 Model.
 
@@ -112,21 +113,21 @@ I have also used Residual Network's Identity block for each Gunn2D layer where t
 <figure>
 <div align="center">
 <img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/GUNN-15_model.png' /><br>
-<figcaption>Figure 5: GUNN-15 model having custon Gunn2D layer. </figcaption></div>
+<figcaption>Figure 5: High-Level Keras Automatic Differentiation graph of GUNN-15 model having custom Gunn2D layer. </figcaption></div>
 </figure>
 
 <br>
 
-The above figure shows the High-Level Keras Automatic Differentiation graph having different layers like Conv2d, Activation etc that are Keras APIs as well as the **Gunn2D layer** which is a custom layer.
+The above figure shows the High-Level Keras Automatic Differentiation graph having different layers like Conv2d, Activation etc that are Keras's APIs as well as the **Gunn2D layer** which is a custom layer.
 
 
-The parameters of the model are given as follows:
+The parameters of the model are given in figure 6. This is useful for calculating the computational cost of the model and also see which layer's operations are stateful and which are stateless. As we see, the Gunn2D layer does have parameters defined, hence it does have trainable weights defined in the model graph.
 
 
 <figure>
 <div align="center">
 <img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/GUNNparameters.png' /><br>
-<figcaption>Figure 5: GUNN-15 model training parameters breakdown for all the stateful layers. </figcaption></div>
+<figcaption>Figure 6: GUNN-15 model training parameters breakdown for all the stateful and stateless layers. </figcaption></div>
 </figure>
 
 
@@ -135,7 +136,7 @@ The parameters of the model are given as follows:
 ## Training
 
 
-Trained the Convolutional Neural Net to classify CIFAR-10's 3 classes in Colab using 5000 training examples and 100 testing examples with batch size of 50 and for 50 epochs, I get the following  output.
+Trained the Convolutional Neural Net to classify CIFAR-10's 3 classes in Colab using 5000 training examples and 100 testing examples with batch size of 50 and for 100 epochs, I get the following  output.
 
 
 Epoch 1/100 <br>
