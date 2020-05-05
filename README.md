@@ -109,8 +109,6 @@ I have also used Residual Network's Identity block for each Gunn2D layer where t
 
 
 
-## Training
-
 <figure>
 <div align="center">
 <img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/GUNN-15_model.png' /><br>
@@ -121,6 +119,20 @@ I have also used Residual Network's Identity block for each Gunn2D layer where t
 
 The above figure shows the High-Level Keras Automatic Differentiation graph having different layers like Conv2d, Activation etc that are Keras APIs as well as the **Gunn2D layer** which is a custom layer.
 
+
+The parameters of the model are given as follows:
+
+
+<figure>
+<div align="center">
+<img src='https://github.com/aishwarya34/CSC580_PrinciplesOfMachineLearning/blob/master/img/GUNNparameters.png' /><br>
+<figcaption>Figure 5: GUNN-15 model training parameters breakdown for all the stateful layers. </figcaption></div>
+</figure>
+
+
+
+
+## Training
 
 
 Trained the Convolutional Neural Net to classify CIFAR-10's 3 classes in Colab using 5000 training examples and 100 testing examples with batch size of 50 and for 50 epochs, I get the following  output.
