@@ -31,7 +31,7 @@ sudo pip install numpy <br>
 
 ## CIFAR-10 Dataset
 
-We do not need to download CIFAR-10 dataset explicitly as we Tensorflow provides *cifar10.load_data()* API which automatically downloads and loads Training and Test set in numpy ndarray.
+We do not need to download CIFAR-10 dataset explicitly as we Tensorflow provides *cifar10.load_data()* API which automatically downloads and loads Training and Test set in numpy ndarray. CIFAR-10 dataset has 32x32 dimensional images having objects from 10 classes as shown in figure 1.
 
 After loading the CIFAR-10 dataset we choose a subset of dataset as follows:
 
