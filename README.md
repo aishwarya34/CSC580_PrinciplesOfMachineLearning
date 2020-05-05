@@ -21,16 +21,26 @@ simultaneously.  This is achieved by updating one channel at a time and using th
 
 ## Prerequisites
 
-Installing pip, tensorflow
+Installing pip, tensorflow, keras, numpy <br>
+
+Commands: <br>
+sudo yum install python-pip <br>
+sudo pip install keras <br>
+sudo pip install tensorflow <br>
+sudo pip install numpy <br>
 
 ## CIFAR-10 Dataset
 
-Number of Training examples = 50000 <br>
-Number of Test examples = 10000 <br>
-X_train shape: (50000, 32, 32, 3) <br>
-Y_train shape: (50000, 10) <br>
-X_test shape: (10000, 32, 32, 3) <br>
-Y_test shape: (10000, 10)
+We do not need to download CIFAR-10 dataset explicitly as we Tensorflow provides *cifar10.load_data()* API which automatically downloads and loads Training and Test set in numpy ndarray.
+
+After loading the CIFAR-10 dataset we choose a subset of dataset as follows:
+
+number of training examples = 15000 <br>
+number of test examples = 3000 <br>
+X_train shape: (15000, 32, 32, 3) <br>
+Y_train shape: (15000, 3) <br>
+X_test shape: (3000, 32, 32, 3) <br>
+Y_test shape: (3000, 3) <br>
 
 
 <figure>
