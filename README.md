@@ -95,6 +95,8 @@ Built Gradually updated Convolutional Neural Net following GUNN-15 model having 
 
 In addition, all the layers parameters are defined in accordance with the model in figure 4.
 
+I have also used Residual Network's Identity block for each Gunn2D layer where the state of layer before doing Gunn2D operations is added to the layer after performing Gunn2D operations. Residual network helps in learning identity function when the gradients vanishes which happend in deep networks. 
+
 
 
 ## Training
@@ -326,14 +328,13 @@ Note: Require to train the whole classifier at once as checkpointing of this mod
 
 ## Evaluation
 
-The GUNN-15 model in the original paper achieved 80% accuracy for 10 class classification. In the above model we have achieved 69.60% accuracy on the test set after training on training and label subset of CIFAR-10 dataset. The best training accuracy achieved was 76.20% hence early stopping also could have helped. 
+The GUNN-15 model in the original paper achieved 80% accuracy for 10 class classification. In the above model we have achieved 69.60% accuracy on the test set after training on training and label subset of CIFAR-10 dataset for 3 classes. The best training accuracy achieved was 76.20% hence early stopping also could have helped. 
 
 
 
 ## Results / Conclusion
 
-Thus, we can see that convolutional neural networks when expanded depth-wise without increasing number of weights causes good classifier of images and also does not increase the computational cost.
-
+Thus, we can see that convolutional neural networks when expanded depth-wise without increasing number of weights causes good classifier of images and also does not increase the computational cost. Also, the residual network properties are seen as for such a deep network the gradients have not vanished or exploded.
 
 ## Reference
 
