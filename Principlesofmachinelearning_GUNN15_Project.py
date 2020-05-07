@@ -86,9 +86,9 @@ print ("Y_test shape: " + str(Y_test_subsetlabel.shape))
 # GUNN Layer implementation (Keras Custom Layer)
 """
 
-def conv_forward(A_shortcut, W1, b1, W2, b2, W3, b3, hparameters):
+def conv_gunn_forward(A_shortcut, W1, b1, W2, b2, W3, b3, hparameters):
     """
-    Implements the forward propagation for a convolution function
+    Implements the forward propagation for a convolution function in a gradual way
     
     Arguments:
     A_shortcut -- output activations of the previous layer, input to this layer, numpy array of shape (m, n_H_prev, n_W_prev, n_C_prev)
@@ -159,7 +159,7 @@ class Gunn2D(layers.Layer):
     self.b3 = self.add_weight(shape=(1, 1, 1, 1), initializer='random_normal', trainable=True)
 
   def call(self, inputs):
-    output = conv_forward(inputs, self.w1, self.b1, self.w2, self.b2, self.w3, self.b3, self.hparameters)
+    output = conv_gunn_forward(inputs, self.w1, self.b1, self.w2, self.b2, self.w3, self.b3, self.hparameters)
     return output
 
 """## Building GUNN-15 Model in Keras for 10 classes of CIFAR-10 dataset"""
